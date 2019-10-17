@@ -1,7 +1,7 @@
 import express from "express";
 import proxy from "express-http-proxy";
 import { matchRoutes } from "react-router-config";
-import Routes from "./client/routes";
+import Routes from "../client/routes";
 import createStore from "./helpers/createStore";
 import renderer from "./helpers/renderer";
 const app = express();
