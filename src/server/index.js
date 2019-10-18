@@ -1,3 +1,4 @@
+import "@babel/polyfill";
 import express from "express";
 import proxy from "express-http-proxy";
 import { matchRoutes } from "react-router-config";
@@ -25,12 +26,15 @@ app.get("*", (req, res) => {
             return route.loadData ? route.loadData(store) : null;
         })
         .map(promise => {
+            // Second .map function helps not to block Promise.all
+            // function below if there at least one promise rejected
             if (promise) {
                 return new Promise((resolve, reject) => {
                     promise.then(resolve).catch(resolve);
                 });
             }
         });
+
 
     Promise.all(promises).then(() => {
         const context = {};
@@ -41,6 +45,12 @@ app.get("*", (req, res) => {
         // in case javascript is disabled on browser
         if (context.url) {
             return res.redirect(301, context.url);
+        }
+
+        // Checking if in any page context.notFound truthy
+        // if so, we sending status code with response 
+        if (context.notFound) {
+            res.status(404);
         }
 
         res.send(content);

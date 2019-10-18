@@ -9,9 +9,6 @@ export default (req) => {
         headers: { cookie: req.get("cookie") || "" }
     });
 
-    return createStore(
-        reducers,
-        {},
-        applyMiddleware(thunk.withExtraArgument(axiosInstance))
-    );
+    const store = createStore(reducers, {}, applyMiddleware(thunk.withExtraArgument(axiosInstance)));
+    return store;
 };

@@ -29,7 +29,7 @@ const loadData = store => {
 };
 
 const mapStateToProps = state => ({
-    admins: props.admins
+    admins: state.admins
 });
 
 export default {

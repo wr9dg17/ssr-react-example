@@ -1,4 +1,5 @@
 // Startup point for the client side application
+import "@babel/polyfill";
 import React from "react";
 import ReactDOM from "react-dom";
 import { createStore, applyMiddleware } from "redux";
@@ -25,5 +26,6 @@ ReactDOM.hydrate(
         <BrowserRouter>
             <div>{renderRoutes(Routes)}</div>
         </BrowserRouter>
-    </Provider>
+    </Provider>,
+    document.getElementById("root")
 );
