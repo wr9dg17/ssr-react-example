@@ -11,9 +11,9 @@ const config = {
     entry: "./src/server/index.js",
     output: {
         filename: "server.bundle.js",
-        path: path.resolve(__dirname, "build")
+        path: path.resolve(__dirname, "build"),
     },
-    externals: [webpackNodeExternals()]
+    externals: [webpackNodeExternals()],
 };
 
 module.exports = merge(baseConfig, config);

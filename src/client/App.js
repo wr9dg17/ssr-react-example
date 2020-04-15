@@ -12,11 +12,11 @@ const App = ({ route }) => {
     );
 };
 
-const loadData = store => {
+const loadData = (store) => {
     return store.dispatch(fetchCurrentUser());
 };
 
 export default {
     loadData: loadData,
-    component: App
+    component: App,
 };

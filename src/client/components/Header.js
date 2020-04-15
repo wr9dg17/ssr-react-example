@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-const Header = props => {
+const Header = (props) => {
     const authButton = props.auth ? (
         <a href="/api/logout">Logout</a>
     ) : (
@@ -30,11 +30,8 @@ const Header = props => {
     );
 };
 
-const mapStateToProps = state => ({
-    auth: state.auth
+const mapStateToProps = (state) => ({
+    auth: state.auth,
 });
 
-export default connect(
-    mapStateToProps,
-    null
-)(Header);
+export default connect(mapStateToProps, null)(Header);

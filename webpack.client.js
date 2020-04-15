@@ -6,8 +6,8 @@ const config = {
     entry: "./src/client/index.js",
     output: {
         filename: "client.bundle.js",
-        path: path.resolve(__dirname, "public")
-    }
+        path: path.resolve(__dirname, "public"),
+    },
 };
 
 module.exports = merge(baseConfig, config);

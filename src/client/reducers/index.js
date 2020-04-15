@@ -6,5 +6,5 @@ import adminsReducer from "./adminsReducer";
 export default combineReducers({
     users: usersReducer,
     auth: authReducer,
-    admins: adminsReducer
+    admins: adminsReducer,
 });

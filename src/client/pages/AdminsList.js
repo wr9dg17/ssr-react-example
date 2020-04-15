@@ -9,7 +9,7 @@ class AdminsList extends Component {
     }
 
     renderAdmins() {
-        return this.props.admins.map(admin => {
+        return this.props.admins.map((admin) => {
             return <li key={admin.id}>{admin.name}</li>;
         });
     }
@@ -24,18 +24,17 @@ class AdminsList extends Component {
     }
 }
 
-const loadData = store => {
+const loadData = (store) => {
     return store.dispatch(fetchAdmins());
 };
 
-const mapStateToProps = state => ({
-    admins: state.admins
+const mapStateToProps = (state) => ({
+    admins: state.admins,
 });
 
 export default {
     loadData: loadData,
-    component: connect(
-        mapStateToProps,
-        { fetchAdmins }
-    )(withRequireAuth(AdminsList))
+    component: connect(mapStateToProps, { fetchAdmins })(
+        withRequireAuth(AdminsList)
+    ),
 };

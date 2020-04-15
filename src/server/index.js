@@ -10,12 +10,15 @@ const app = express();
 app.use(express.static("public"));
 
 // Second argument of proxy function is optional
-app.use("/api", proxy("http://react-ssr-api.herokuapp.com", {
-    proxyReqOptDecorator(options) {
-        options.headers["x-forwarded-host"] = "localhost:3000";
-        return options;
-    }
-}));
+app.use(
+    "/api",
+    proxy("http://react-ssr-api.herokuapp.com", {
+        proxyReqOptDecorator(options) {
+            options.headers["x-forwarded-host"] = "localhost:3000";
+            return options;
+        },
+    })
+);
 
 app.get("*", (req, res) => {
     const store = createStore(req);
@@ -25,7 +28,7 @@ app.get("*", (req, res) => {
         .map(({ route }) => {
             return route.loadData ? route.loadData(store) : null;
         })
-        .map(promise => {
+        .map((promise) => {
             // Second .map function helps not to block Promise.all
             // function below if there at least one promise rejected
             if (promise) {
@@ -35,12 +38,11 @@ app.get("*", (req, res) => {
             }
         });
 
-
     Promise.all(promises).then(() => {
         const context = {};
         const content = renderer(req, store, context);
 
-        // Checking if on "client side" user is redurected
+        // Checking if on "client side" user is redirected
         // if so, we also redirectiong user in "server side"
         // in case javascript is disabled on browser
         if (context.url) {
@@ -48,7 +50,7 @@ app.get("*", (req, res) => {
         }
 
         // Checking if in any page context.notFound truthy
-        // if so, we sending status code with response 
+        // if so, we sending status code with response
         if (context.notFound) {
             res.status(404);
         }

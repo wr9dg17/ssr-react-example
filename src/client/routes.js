@@ -11,19 +11,19 @@ export default [
             {
                 path: "/",
                 ...Home,
-                exact: true
+                exact: true,
             },
             {
                 path: "/users",
-                ...UsersList
+                ...UsersList,
             },
             {
                 path: "/admins",
-                ...AdminsList
+                ...AdminsList,
             },
             {
-                ...NotFound
-            }
-        ]
-    }
+                ...NotFound,
+            },
+        ],
+    },
 ];
